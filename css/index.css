@@ -1,0 +1,75 @@
+.pic-box{
+	width: 100%;
+	height: 3.2rem;
+}
+
+
+/** prod-box */
+.panel .prod-box{
+	padding: 0.2rem 0.1rem;
+	font-size: 0;
+}
+
+.panel .prod-box li{
+	width: 50%;
+	display: inline-block;
+	margin-bottom: 0.2rem;
+	padding: 0 0.1rem;
+}
+
+/*.panel .prod-box li:nth-child(2n+1){
+	padding-left: 0.1rem;	
+}
+
+.panel .prod-box li:nth-child(2n+0){
+	padding-right: 0.1rem;	
+	
+}*/
+
+.panel .prod-box li .prod-pic{
+	width: 100%;
+	padding-top: 100%;
+	position: relative;
+}
+
+.panel .prod-box li .prod-pic img{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	object-fit:contain;
+}
+
+.panel .prod-box li .prod-name{
+	width: 100%;
+	font-size: 0.24rem;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	display: block;
+	height: 0.4rem;
+	line-height: 0.4rem;
+}
+
+.loading-msg{
+	line-height: 0.6rem;
+	height: 0.6rem;
+	width: 100%;
+	text-align: center;
+	font-size: 0.26rem;
+	color: #666666;
+	display: none;
+}
+
+.loading-msg .loading-ico{
+	background-image: url("../svg/loading.svg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 0.4rem 0.4rem;
+	width: 0.4rem;
+	height: 0.6rem;
+	vertical-align: top;
+	display: inline-block;
+	margin-right: 0.2rem;
+}

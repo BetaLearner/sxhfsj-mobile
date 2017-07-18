@@ -1,0 +1,25 @@
+.recruit-box{
+	font-size: 0.24rem;
+}
+
+.recruit-box > li{
+	margin-bottom: 0.2rem;
+}
+
+.recruit-box > li .name{
+	line-height: 2;
+	border-bottom: 0.01rem solid #ccc;
+	margin-bottom: 0.1rem;
+	font-size: 0.28rem;
+}
+
+.recruit-box > li .requirement{
+	line-height: 1.5;
+}
+
+
+.recruit-box > li .condition-box{}
+
+.recruit-box > li .condition-box li{
+	line-height: 1.5;
+}

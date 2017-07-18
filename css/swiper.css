@@ -1,0 +1,43 @@
+.swiper{
+	position:relative;
+	overflow: hidden;
+}
+.swiper .item{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+.swiper .item img{
+	width: 100%;
+	height: 100%;
+	object-fit:cover;
+}
+
+/*.swiper .item.curr,.swiper .item.next,.swiper .item.prev{
+	display: block;
+	transition: transform 0.5s linear;
+}
+*/
+
+
+
+.swiper .item.curr,.swiper .item.next,.swiper .item.prev{
+	display: block;
+	transition: transform 0.3s linear;
+}
+
+.swiper .item.prev{
+	transform: translateX(-100%);
+}
+
+.swiper .item.curr{
+	transform: translateX(0);
+}
+
+.swiper .item.next{
+	transform: translateX(100%);
+}

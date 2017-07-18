@@ -1,0 +1,256 @@
+@font-face{
+	font-family: icomoon;
+	src : url("../tff/icomoon.woff");
+}
+
+*{margin:0;padding:0;box-sizing: border-box;-webkit-box-sizing: border-box;-moz-box-sizing:border-box;-webkit-tap-highlight-color: rgba(200,200,200,0);}
+/**-webkit-user-select: none; */
+html{font-size : 48px ;height: 100%;width: 100%;font-family: icomoon, "Helvetica Neue", Helvetica, STHeiTi, sans-serif;}
+/** * Galaxy S5 landscape & portrait */
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3){html{font-size: 56px ;}}
+/** * Galaxy S5 landscape & portrait */
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4){html{font-size: 56px ;}}
+@media only screen and (min-width: 375px){html{font-size: 58px ;}}
+@media only screen and (min-width: 414px){html{font-size: 64px ;}}
+@media only screen and (min-width: 481px){html{font-size: 70px ;}}
+@media only screen and (min-width: 569px){html{font-size: 65px ;}}
+@media only screen and (min-width: 640px){html{font-size: 100px !important;
+	width: 640px;margin:auto;
+	}}
+/*@media only screen and (min-width: 600px){html{font-size: 93px ;}}
+@media only screen and (min-width: 800px){html{font-size: 93px ;}}*/
+@media screen and (max-device-width: 480px){body{-webkit-text-size-adjust: none;}}
+a{text-decoration: none;-webkit-tap-highlight-color:rgba(221, 221, 221,0)}
+/*a:visited{color: #000000;}*/
+body{margin:0; 
+font-size:.24rem; 
+	width:100%;height: 100%;background:#f6f6f6;}
+dl,dt,dd{margin:0; padding:0}
+ul{margin:0;padding:0}
+li{list-style-type:none;}
+input{outline:none} 
+.clearfix:after{
+	content:".";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+}
+.dlg{position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 99;}
+.dlg.on{display: block;}
+.dlg.off{display: none;}
+.dlg .mask{position: fixed;width: 100%;height: 100%;left: 0;top: 0;opacity: 0.7;background-color: #000000;
+    z-index: 100;
+}
+
+.container{
+	padding-top: 0.8rem;
+	position: relative;
+	height: 100%;
+	overflow: auto;
+	background-color: #eee;
+}
+
+.index-title{
+	padding: 0 0.8rem;
+	background-color: rgba(0, 0, 0, 0.6);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	text-align: center;
+	color: #ffffff;
+}
+
+/*.index-title .menu{
+	position: absolute;
+	top: 0;right: 0;
+	background-image: url("../svg/menu.svg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 0.4rem 0.4rem;
+	width: 0.8rem;
+	height: 0.8rem;
+}*/
+
+.index-title .menu{
+	position: absolute;
+	top: 0;right: 0;
+	background-image: url("../svg/menu.svg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 0.4rem 0.4rem;
+	width: 0.8rem;
+	height: 0.8rem;
+	-webkit-transition: background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease, -webkit-transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    transition: background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease, -webkit-transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease, -webkit-transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+.index-title .menu.on{
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+
+.menu-panel{
+	width: 100%;
+	height: 0;
+	position: absolute;
+	z-index: 1;
+	background-color: #ffffff;
+	overflow: hidden;
+	opacity: 0;
+	transition : all 0.3s linear;
+}
+.menu-panel li{
+	height: 1rem;
+	line-height: 1rem;
+	padding: 0 0.8rem 0 1.2rem;
+	border-bottom: 0.01rem solid #ccc;
+	font-size: 0.3rem;
+	position: relative;
+	cursor: pointer;
+}
+
+.menu-panel li.active{
+	background-color: #cccccc;
+}
+
+/*.menu-panel li:active{
+	background-color: #cccccc;
+}*/
+
+/*.menu-panel li a:active{
+	background-color: #333333;
+}
+*/
+.menu-panel li a{
+	width: 100%;
+	height: 100%;
+	display: block;
+	color: #333;
+}
+
+.menu-panel.on{
+	opacity: 1;
+}
+
+
+.nav-ico{
+	line-height: 1rem;
+	height: 1rem;
+	width: 1rem;
+	font-size: 0.5rem;
+    color: #666;
+    position: absolute;
+    left: 0.2rem;
+    top: 0;
+}
+
+.nav-ico.ico-index:before	{content: "\e900";}
+.nav-ico.ico-prod:before	{content: "\e90e";}
+.nav-ico.ico-recruit:before{content: "\e972";}
+.nav-ico.ico-desc:before	{content: "\e922";}
+.nav-ico.ico-dynamic:before{content: "\e92e";}
+.nav-ico.ico-contact:before{content: "\e944";}
+
+
+.main{
+	height: 100%;overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	background-color: #ffffff;
+}
+
+.panel{
+	background-color: #ffffff;
+	margin-bottom: 0.2rem;
+}
+.panel .bar{
+	line-height: 0.8rem;
+	height: 0.8rem;
+	width: 100%;
+	padding-right: 0.6rem;
+	border-bottom: 0.01rem solid #eee;
+}
+.panel .bar .title{
+	line-height: 0.8rem;
+	height: 0.8rem;
+	font-size: 0.3rem;
+	/*width: 1.5rem;*/
+	border-bottom: 0.04rem solid #ccc;
+	display: inline-block;
+	padding: 0 0.2rem
+}
+.panel .content{
+	padding: 0.2rem;
+	line-height: 1.5;
+	font-size: 0.24rem;
+}
+.panel .content p{
+	text-indent: 0.48rem;
+	line-height: 1.5;
+}
+
+
+.img-close{
+	position: absolute;z-index:14;float:right;
+	line-height: 44px;display:inline-block;color: #fefefe;font-size: 0.32rem;;
+	width: 44px;
+    height: 44px;
+    background: none;
+    cursor: pointer;
+    overflow: visible;
+    -webkit-appearance: none;
+    display: block;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    opacity: 0.75;
+    -webkit-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    bottom: 0;
+    left: 0;
+    text-align: center;width: 1.2rem;
+
+}
+
+
+.footer{
+	padding-bottom: 0.1rem;
+}
+
+.footer .back-bar{
+	line-height: 0.5rem;
+	height: 0.5rem;
+	text-align: right;
+	background-color: rgba(0, 0, 0, 0.6);
+	font-size: 0.26rem;
+	padding-right: 0.6rem;
+	position: relative;
+	color: #ffffff;
+	font-weight: 700;
+}
+
+.footer .back-bar .t-array{
+	position: absolute;
+    width: 0;
+    height: 0;
+    top: .1rem;
+    right: .2rem;
+    border: .1rem transparent solid;
+    border-bottom-color: #fff;
+}
+
+.footer p{
+	text-align: center;
+	font-size: 0.2rem;
+	line-height: 1.5;
+}
+    
