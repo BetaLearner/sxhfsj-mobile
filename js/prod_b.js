@@ -39,18 +39,14 @@
 				var contentH =$('.scroll-panel').height();//内容高度  
 				var scrollTop = $(this)[0].scrollTop;//滚动高度  
 				if(contentH - viewH - scrollTop <= 50 ) { //到达底部100px时,加载新内容  
-					if(_this.loading || _this.currProdIndex >= _this.prodList.length){
+					if(_this.loading){
 						return;
 					}
 					_this.loading = true;
 					$('.loading-msg').show();
 					setTimeout(function(){
-						if(_this.currListIndex == 0){
-							var prodData = _this.prodList[_this.currProdIndex];
-							_this.loadProd({prodId : prodData.id});
-						}else{
-							_this.appendProd();	
-						}
+						// _this.appendProd();
+						_this.appendProd();
 						$('.loading-msg').hide();	
 					}, 1000);
 				}
@@ -68,14 +64,15 @@
 			var $first = $('.prod-nav').find('li').first();
 			$first.addClass('active');
 			var prodId = $first.attr('data-id');
-			_this.loadProd({prodId : prodId });
+			_this.loadProd({prodId : prodId});
 		},
 		loadProd : function(params){
-			_this.currListIndex=0;
+			_this.currListIndex = 0;
 			var $this = $(this);
 			var prodId = $this.attr('data-id');
 			if(params.prodId){
 				prodId = params.prodId;
+				_this.currProdIndex = 0;
 			}else{
 				$this.addClass('active').siblings('li').removeClass('active');
 				_this.currProdIndex = $this.attr('data-index');
@@ -90,7 +87,7 @@
 			var title = '';
 			var $panel = $('#prod_list');
 			if(_this.currListIndex == 0){
-				// title = '<div class="prod-type" ><span>' + prodData.name + '</span></div>';
+				title = '<div class="prod-type" ><span>' + prodData.name + '</span></div>';
 				$('.prod-box').scrollTop(0);
 				$('.prod-nav li').eq(_this.currProdIndex).addClass('active').siblings('li').removeClass('active');
 				$panel.html('');
@@ -109,9 +106,7 @@
 			html = title + html;
 			$panel.html(html);
 			_this.initGallery();
-			setTimeout(function(){
-				_this.loading = false;
-			}, 500);
+			_this.loading = false;
 		},
 		appendProd : function(){
 			if(_this.currProdIndex >= _this.prodList.length){
@@ -124,7 +119,7 @@
 			var end = (_this.currListIndex + 1) * _this.pageSize;
 			var title = '';
 			if(_this.currListIndex == 0){
-				// title = '<div class="prod-type" ><span>' + prodData.name + '</span></div>';
+				title = '<div class="prod-type" ><span>' + prodData.name + '</span></div>';
 				$('.prod-nav li').eq(_this.currProdIndex).addClass('active').siblings('li').removeClass('active');
 			}
 			if(listSize < end){

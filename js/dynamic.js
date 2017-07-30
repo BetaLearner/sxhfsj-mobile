@@ -2,32 +2,51 @@
 	var _this = null;
 	_this = P.dynamic = {
 		tpl : {
+			dynamicTpl : null,
 			prodTpl : null
 		},
 		data : {},
 		init : function(options){
+			_this.tpl.dynamicListTpl = juicer($('#dynamic-list-tpl').html());
+			_this.tpl.dynamicTpl = juicer($('#dynamic-tpl').html());
 			_this.tpl.prodTpl = juicer($('#prod-tpl').html());
 			_this.initEvent();//基本事件
-			_this.loadProd();
+			_this.loadDynamic();
 		},
 		initEvent : function(){
 			$('#img_close').unbind('click');
 			$('#img_close').click(function(){
 				_this.closeImgPlayer();
 			});
+
+			$('#wrapper').on('click', '.dynamic-name', _this.showDetail);
 		},
-		loadProd : function(){
-			var prodData = P.data.prod[1];
-			var html = _this.tpl.prodTpl.render(prodData);
-			$('.prod-box').html(html);
-			_this.initGallery();
+		loadDynamic : function(){
+			var data = {
+				list : P.data.dynamic
+			};
+			var html = _this.tpl.dynamicListTpl.render(data);
+			$('#dynamic_list').html(html);
+			var $imgs = $('body').find('.roll-box li img');
+			_this.initGallery($imgs);
+			// _this.initRoll();
+		},
+		showDetail : function(){
+			var $this = $(this);
+			var index = $this.attr('data-index');
+			var dynamic = P.data.dynamic[index];
+			var html = _this.tpl.dynamicTpl.render(dynamic);
+			$('#detail_panel').html(html);
+			$('#list_panel').hide();
+			$('#detail_panel').show();
+			var $imgs = $('body').find('.prod-box li img');
+			_this.initGallery($imgs);
 		},
 		closeImgPlayer : function(){
 			_this.pswp.close();
 		},
-		initPSWPItems : function(){
+		initPSWPItems : function($imgs){
 			var width = screen.width,height = screen.height;
-			var $imgs = $('body').find('.prod-box li img');
 			$imgs.addClass('demo-gallery');//图集预览
 
 			// _this.data.pwspItems = [];
@@ -84,14 +103,13 @@
 				};
 			});
 		},
-		initGallery : function(){
-			_this.initPSWPItems();
+		initGallery : function($imgs){
+			_this.initPSWPItems($imgs);
 			var initPhotoSwipeFromDOM = function(gallerySelector) {
 				var parseThumbnailElements = function(el) {
 					var thumbElements = el.childNodes;
 				    var items = [];
 				    var width = screen.width,height = screen.height;
-					var $imgs = $('body').find('.prod-box li img');
 					for(var key in _this.data.pwspItemMap){
 						items.push(_this.data.pwspItemMap[key]);
 					}

@@ -24,27 +24,28 @@ var swiper = {
 		var startPos = {x:0,y:0};
 		var endPos = {x:0,y:0};
 		var isScrolling = 0;
-		swiper.$box.on('touchstart', function(event){
+		swiper.$box[0].addEventListener('touchstart', function(event){
 			event.preventDefault();
+			console.log(event);
 			var touch = event.targetTouches[0];	 //touches数组对象获得屏幕上所有的touch，取第一个touch
 			startPos = {x:touch.pageX,y:touch.pageY,time:+new Date};	//取第一个touch的坐标值
 			isScrolling = 0; //这个参数判断是垂直滚动还是水平滚动
 		});
 
-		swiper.$box.on('touchmove', function(event){
+		swiper.$box[0].addEventListener('touchmove', function(event){
 			var touch = event.targetTouches[0];
 			endPos = {x:touch.pageX - startPos.x,y:touch.pageY - startPos.y};
 			isScrolling = Math.abs(endPos.x) < Math.abs(endPos.y) ? 1:0;	//isScrolling为1时，表示纵向滑动，0为横向滑动
 		});
 
-		swiper.$box.on('touchend', function(event){
+		swiper.$box[0].addEventListener('touchend', function(event){
 			if(isScrolling === 0){	//当为横向滚动时
-			if(endPos.x > 50){//move right
-				swiper.back();
-			}
-			if(endPos.x < -50){//move right
-				swiper.forward();
-			}
+				if(endPos.x > 50){//move right
+					swiper.back();
+				}
+				if(endPos.x < -50){//move right
+					swiper.forward();
+				}
 			}
 		});
 	},

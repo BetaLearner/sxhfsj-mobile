@@ -154,6 +154,8 @@ $(document).ready(function() {
 		var $this = $(this);
 		$this.addClass('active');
 		setTimeout(function(){
+			$('.menu').removeClass('on');
+			$('.menu-panel').removeClass('on').height(0);
 			window.location.href = $this.attr('data-href');
 		}, 100);
 	});
