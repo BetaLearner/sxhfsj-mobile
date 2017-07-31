@@ -9,11 +9,6 @@
 			name : '高级卫生用品',
 			desc : '高级卫生用品。并在西部医疗器械保健品交易中心设立了销售门店，积极拓展新的市场。',
 			pics : ['http://sxhfsj.com/source/gaojiweisheng/1.jpg','http://sxhfsj.com/source/gaojiweisheng/2-1.jpg']
-		},
-		{
-			name : '高级卫生用品',
-			desc : '高级卫生用品。并在西部医疗器械保健品交易中心设立了销售门店，积极拓展新的市场。',
-			pics : ['http://sxhfsj.com/source/gaojiweisheng/1.jpg','http://sxhfsj.com/source/gaojiweisheng/2-1.jpg']
 		}
 	];
 }(sxhfsj));

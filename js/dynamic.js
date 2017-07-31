@@ -20,6 +20,7 @@
 			});
 
 			$('#wrapper').on('click', '.dynamic-name', _this.showDetail);
+			$('#wrapper').on('click', '.return', _this.hideDetail);
 		},
 		loadDynamic : function(){
 			var data = {
@@ -38,9 +39,15 @@
 			var html = _this.tpl.dynamicTpl.render(dynamic);
 			$('#detail_panel').html(html);
 			$('#list_panel').hide();
+			$('.return').show();
 			$('#detail_panel').show();
 			var $imgs = $('body').find('.prod-box li img');
 			_this.initGallery($imgs);
+		},
+		hideDetail : function(){
+			$('#detail_panel').hide();
+			$('.return').hide();
+			$('#list_panel').show();
 		},
 		closeImgPlayer : function(){
 			_this.pswp.close();

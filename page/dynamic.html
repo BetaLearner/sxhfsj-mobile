@@ -8,9 +8,10 @@
   </head>
   <body>
     <div id="wrapper" class="container">
+      <span class="return"></span>
       <!--#include file="include/menu.html"-->
       <div class="main">
-        <div id="list_panel" class="list-panel" >
+        <div id="list_panel" class="list-panel panel" >
           <div class="bar">
             <span class="title">企业动态</span>
           </div>
@@ -26,7 +27,6 @@
         <div class="dynamic-item">
           <span data-index="${index}" class="dynamic-name">${item.name}</span>
           <div class="dynamic-desc">${item.desc}</div>
-
           <div class="roll-panel">
             <ul class="roll-box">
               {@each item.pics as pic}
