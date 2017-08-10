@@ -25,36 +25,77 @@
 		},
 		initEvent : function(){
 			$('#wrapper').on('touchstart', function(event){
-				// event.preventDefault();
+				event.preventDefault();
 			});
-			$('.prod-nav').on('click', 'li', _this.loadProd);
-			$('#img_close').unbind('click');
-			$('#img_close').click(function(){
-				_this.closeImgPlayer();
-			});
+			$('.prod-nav').on('tap', 'li', _this.loadProd);
+			$('#img_close').on('tap', _this.closeImgPlayer);
+			// $('.prod-box').scroll(function(){//document scroll event
+			// 	var $this = $(this);
+			// 	var viewH = $('.prod-box').height();//可见高度  
+			// 	var contentH =$('.scroll-panel').height();//内容高度  
+			// 	var scrollTop = $(this)[0].scrollTop;//滚动高度  
+			// 	if(contentH - viewH - scrollTop <= 50 ) { //到达底部100px时,加载新内容  
+			// 		if(_this.loading || _this.currProdIndex >= _this.prodList.length){
+			// 			return;
+			// 		}
+			// 		_this.loading = true;
+			// 		$('.loading-msg').show();
+			// 		setTimeout(function(){
+			// 			if(_this.currListIndex == 0){
+			// 				var prodData = _this.prodList[_this.currProdIndex];
+			// 				_this.loadProd({prodId : prodData.id});
+			// 			}else{
+			// 				_this.appendProd();	
+			// 			}
+			// 			$('.loading-msg').hide();	
+			// 		}, 1000);
+			// 	}
+			// });
+			_this.initProdBoxEvent();
+		},
+		initProdBoxEvent : function(){
+			var newsPanel = document.getElementById('prod_list');
+		    var startPos = {x:0,y:0};
+		    var endPos = {x:0,y:0};
+		    var isScrolling = 0;
+		    newsPanel.addEventListener('touchstart', function(event){
+		      event.preventDefault();
+		      var touch = event.targetTouches[0];  //touches数组对象获得屏幕上所有的touch，取第一个touch
+		      startPos = {x:touch.pageX,y:touch.pageY,time:new Date().getTime()};  //取第一个touch的坐标值
+		      isScrolling = 0; //这个参数判断是垂直滚动还是水平滚动
+		    });
 
-			$('.prod-box').scroll(function(){//document scroll event
-				var $this = $(this);
-				var viewH = $('.prod-box').height();//可见高度  
-				var contentH =$('.scroll-panel').height();//内容高度  
-				var scrollTop = $(this)[0].scrollTop;//滚动高度  
-				if(contentH - viewH - scrollTop <= 50 ) { //到达底部100px时,加载新内容  
-					if(_this.loading || _this.currProdIndex >= _this.prodList.length){
-						return;
-					}
-					_this.loading = true;
-					$('.loading-msg').show();
-					setTimeout(function(){
-						if(_this.currListIndex == 0){
-							var prodData = _this.prodList[_this.currProdIndex];
-							_this.loadProd({prodId : prodData.id});
-						}else{
-							_this.appendProd();	
-						}
-						$('.loading-msg').hide();	
-					}, 1000);
-				}
-			});
+		    newsPanel.addEventListener('touchmove', function(event){
+		      var touch = event.targetTouches[0];
+		      endPos = {x:touch.pageX - startPos.x,y:touch.pageY - startPos.y};
+		      isScrolling = Math.abs(endPos.x) < Math.abs(endPos.y) ? 1:0;  //isScrolling为1时，表示纵向滑动，0为横向滑动
+		      // console.log(endPos);
+		      $('#prod_list').css('transition', 'initial').css('transform', 'translateY(' + endPos.y + 'px)');
+		      if(endPos.y > 100){//move right
+		        $('.loading-before').addClass('show');
+		      }
+		    });
+
+		    newsPanel.addEventListener('touchend', function(event){
+		      endPos.time = new Date().getTime();
+		      console.log(endPos.y);
+		      if(isScrolling === 1){  //当为竖直滚动时
+		        if(endPos.y > 100){//move right
+		          $('#prod_list').css('transition', 'transform 0.4s').css('transform', 'translateY(' + $('.loading-before').height() + 'px)');
+		          prev();
+		        }else{
+		          $('#prod_list').css('transition', 'transform 0.4s').css('transform', 'translateY(0px)');
+		        }
+		      }
+		    });
+
+		    var prev = function(){
+		      setTimeout(function(){
+		        $('.loading-before').removeClass('show');
+		        $('#prod_list').css('transition', 'transform 0.4s').css('transform', 'translateY(0px)');
+		      }, 1000);
+		      
+		    };
 		},
 		loadProdNav : function(){
 			var prodData = P.data.prod;

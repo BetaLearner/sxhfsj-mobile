@@ -112,7 +112,8 @@
 	font-size: 0;
 	float: right;
 	height: 100%;
-	overflow: auto;
+	/*overflow: auto;*/
+	overflow: hidden;
 }
 
 
@@ -153,6 +154,7 @@
 }
 .prod-panel.vertical .prod-box{
 	-webkit-overflow-scrolling: touch;
+	position: relative;
 }
 
 .loading-msg{
@@ -162,7 +164,7 @@
 	text-align: center;
 	font-size: 0.26rem;
 	color: #666666;
-	display: none;
+	/*display: none;*/
 }
 
 .loading-msg .loading-ico{
@@ -179,5 +181,25 @@
 
 .scroll-panel{
 	padding-bottom: 1rem;
-	min-height: 105%;
+	min-height: 100%;
+}
+
+/***/
+.loading-before{
+  width: 100%;
+  height: 0;
+  line-height: 0.6rem;
+  text-align: center;
+  font-size: 0.24rem;
+  /*transform: scale(0);*/
+  transition:height 0.4s;
+  position: absolute;
+  top: -0.6rem;
+  left: 0;
+  z-index: 0;
+}
+.loading-before.show{
+  top: 0;
+  height: 0.6rem;
+  /*transform: scale(1);*/
 }
