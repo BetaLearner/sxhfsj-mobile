@@ -87,7 +87,6 @@
 		        $('.loading-before').removeClass('show');
 		        $('#prod_list').css('transition', 'transform 0.4s').css('transform', 'translateY(0px)');
 		        offsetTop = 0;
-
 		        if(_this.currProdIndex > 0){
 		        	_this.currProdIndex--;
 		        	var prodData = _this.prodList[_this.currProdIndex];
@@ -130,7 +129,7 @@
 				$this.addClass('active').siblings('li').removeClass('active');
 				_this.currProdIndex = $this.attr('data-index');
 			}
-
+			_this.currListIndex=0;
 			var prodData = _this.prodList[_this.currProdIndex];
 			var list = prodData.list;
 			var listSize = list.length;
@@ -170,7 +169,11 @@
 
 			if (listSize < start) {
 				_this.currProdIndex++;
-				_this.currListIndex=0;
+				if(_this.currProdIndex >= _this.prodList.length){
+					_this.currProdIndex--;
+					$('#prod_list').css('transition', 'transform 0.4s').css('transform', 'translateY(0px)');
+					return;
+				}
 				var prodData = _this.prodList[_this.currProdIndex];
 				return _this.loadProd({prodId : prodData.id});
 			}
