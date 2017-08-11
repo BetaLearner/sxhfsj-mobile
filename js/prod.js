@@ -1,5 +1,6 @@
 (function(P){
 	var _this = null;
+	var offsetTop = 0;
 	_this = P.prod = {
 		tpl : {
 			prodNavTpl : null,
@@ -8,6 +9,8 @@
 		data : {},
 		pageSize : 6,
 		prodList : [],
+		currProdIndex : 0,
+		currListIndex : 0,
 		init : function(options){
 			_this.tpl.prodNavTpl = juicer($('#prod-nav-tpl').html());
 			_this.tpl.prodTpl = juicer($('#prod-tpl').html());
@@ -29,28 +32,6 @@
 			});
 			$('.prod-nav').on('tap', 'li', _this.loadProd);
 			$('#img_close').on('tap', _this.closeImgPlayer);
-			// $('.prod-box').scroll(function(){//document scroll event
-			// 	var $this = $(this);
-			// 	var viewH = $('.prod-box').height();//可见高度  
-			// 	var contentH =$('.scroll-panel').height();//内容高度  
-			// 	var scrollTop = $(this)[0].scrollTop;//滚动高度  
-			// 	if(contentH - viewH - scrollTop <= 50 ) { //到达底部100px时,加载新内容  
-			// 		if(_this.loading || _this.currProdIndex >= _this.prodList.length){
-			// 			return;
-			// 		}
-			// 		_this.loading = true;
-			// 		$('.loading-msg').show();
-			// 		setTimeout(function(){
-			// 			if(_this.currListIndex == 0){
-			// 				var prodData = _this.prodList[_this.currProdIndex];
-			// 				_this.loadProd({prodId : prodData.id});
-			// 			}else{
-			// 				_this.appendProd();	
-			// 			}
-			// 			$('.loading-msg').hide();	
-			// 		}, 1000);
-			// 	}
-			// });
 			_this.initProdBoxEvent();
 		},
 		initProdBoxEvent : function(){
@@ -58,6 +39,7 @@
 		    var startPos = {x:0,y:0};
 		    var endPos = {x:0,y:0};
 		    var isScrolling = 0;
+		    var offset = offsetTop;
 		    newsPanel.addEventListener('touchstart', function(event){
 		      event.preventDefault();
 		      var touch = event.targetTouches[0];  //touches数组对象获得屏幕上所有的touch，取第一个touch
@@ -69,32 +51,57 @@
 		      var touch = event.targetTouches[0];
 		      endPos = {x:touch.pageX - startPos.x,y:touch.pageY - startPos.y};
 		      isScrolling = Math.abs(endPos.x) < Math.abs(endPos.y) ? 1:0;  //isScrolling为1时，表示纵向滑动，0为横向滑动
-		      // console.log(endPos);
-		      $('#prod_list').css('transition', 'initial').css('transform', 'translateY(' + endPos.y + 'px)');
-		      if(endPos.y > 100){//move right
-		        $('.loading-before').addClass('show');
-		      }
+		      offset = offsetTop + endPos.y;
+		      $('#prod_list').css('transition', 'initial').css('transform', 'translateY(' + offset + 'px)');
 		    });
 
 		    newsPanel.addEventListener('touchend', function(event){
-		      endPos.time = new Date().getTime();
-		      console.log(endPos.y);
-		      if(isScrolling === 1){  //当为竖直滚动时
-		        if(endPos.y > 100){//move right
-		          $('#prod_list').css('transition', 'transform 0.4s').css('transform', 'translateY(' + $('.loading-before').height() + 'px)');
-		          prev();
-		        }else{
-		          $('#prod_list').css('transition', 'transform 0.4s').css('transform', 'translateY(0px)');
-		        }
-		      }
+		    	var prevTrigger = $('.loading-before').height();
+		      	var nextTrigger = $('#prod_box').height() - $('.loading-after').height() - $('#prod_list').height();
+		      	if(offset > prevTrigger){//move top
+		        	$('.loading-before').addClass('show');
+		      	}
+
+		      	if(offset < nextTrigger){//move top
+		        	$('.loading-after').addClass('show');
+		      	}
+
+		      	endPos.time = new Date().getTime();
+		      	offsetTop = offset;
+		      	if(isScrolling === 1){  //当为竖直滚动时
+		        	if(offsetTop > prevTrigger){//向上滑动 回弹
+		        		offsetTop = prevTrigger;
+			          	$('#prod_list').css('transition', 'transform 0.4s').css('transform', 'translateY(' + offsetTop + 'px)');
+			          	prev();
+			        }
+			        if(offsetTop < nextTrigger){
+			        	$('#prod_list').css('transition', 'transform 0.4s').css('transform', 'translateY(' + nextTrigger + 'px)');
+			        	offsetTop = nextTrigger;
+			        	next();
+			        }
+		      	}
 		    });
 
 		    var prev = function(){
 		      setTimeout(function(){
 		        $('.loading-before').removeClass('show');
 		        $('#prod_list').css('transition', 'transform 0.4s').css('transform', 'translateY(0px)');
+		        offsetTop = 0;
+
+		        if(_this.currProdIndex > 0){
+		        	_this.currProdIndex--;
+		        	var prodData = _this.prodList[_this.currProdIndex];
+					_this.loadProd({prodId : prodData.id});
+		        }
 		      }, 1000);
-		      
+		    };
+		    var next = function(){
+		      setTimeout(function(){
+		        $('.loading-after').removeClass('show');
+		        var nextTrigger = $('#prod_box').height() - $('.loading-after').height() - $('#prod_list').height();
+				var prodData = _this.prodList[_this.currProdIndex];
+				_this.appendProd();
+		      }, 1000);
 		    };
 		},
 		loadProdNav : function(){
@@ -112,16 +119,17 @@
 			_this.loadProd({prodId : prodId });
 		},
 		loadProd : function(params){
-			_this.currListIndex=0;
+			$('#prod_list').css('transition', 'initial').css('transform', 'translateY(0px)');
+			offsetTop = 0;
+
 			var $this = $(this);
 			var prodId = $this.attr('data-id');
-			if(params.prodId){
+			if(params && params.prodId){
 				prodId = params.prodId;
 			}else{
 				$this.addClass('active').siblings('li').removeClass('active');
 				_this.currProdIndex = $this.attr('data-index');
 			}
-			
 
 			var prodData = _this.prodList[_this.currProdIndex];
 			var list = prodData.list;
@@ -131,18 +139,8 @@
 			var title = '';
 			var $panel = $('#prod_list');
 			if(_this.currListIndex == 0){
-				// title = '<div class="prod-type" ><span>' + prodData.name + '</span></div>';
-				$('.prod-box').scrollTop(0);
 				$('.prod-nav li').eq(_this.currProdIndex).addClass('active').siblings('li').removeClass('active');
 				$panel.html('');
-			}
-
-			if(listSize < end){
-				end = listSize;
-				_this.currProdIndex++;
-				_this.currListIndex=0;
-			}else{
-				_this.currListIndex++;	
 			}
 
 			list = list.slice(start, end);
@@ -158,6 +156,8 @@
 			if(_this.currProdIndex >= _this.prodList.length){
 				return;
 			}
+
+			_this.currListIndex++;
 			var prodData = _this.prodList[_this.currProdIndex];
 			var list = prodData.list;
 			var listSize = list.length;
@@ -165,15 +165,20 @@
 			var end = (_this.currListIndex + 1) * _this.pageSize;
 			var title = '';
 			if(_this.currListIndex == 0){
-				// title = '<div class="prod-type" ><span>' + prodData.name + '</span></div>';
 				$('.prod-nav li').eq(_this.currProdIndex).addClass('active').siblings('li').removeClass('active');
 			}
-			if(listSize < end){
-				end = listSize;
+
+			if (listSize < start) {
 				_this.currProdIndex++;
 				_this.currListIndex=0;
-			}else{
-				_this.currListIndex++;	
+				var prodData = _this.prodList[_this.currProdIndex];
+				return _this.loadProd({prodId : prodData.id});
+			}
+
+			if(listSize < end){
+				end = listSize;
+				// _this.currProdIndex++;
+				// _this.currListIndex=0;
 			}
 
 
