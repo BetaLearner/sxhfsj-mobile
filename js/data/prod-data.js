@@ -115,24 +115,9 @@ sxhfsj.data.prod[3] = {
 			desc	: '120ml固体塑料瓶 ￠48×97'
 		},
 		{
-			pic		: 'http://sxhfsj.com/source/putongguti/120ml_1.jpg',
-			desc	: '120ml固体大口塑料瓶 ￠52×87'
-		},
-		{
-			pic		: 'http://sxhfsj.com/source/putongguti/120ml_2.jpg',
-			desc	: '120ml固体塑料瓶 ￠48×90'
-		},
-		{
 			pic		: 'http://sxhfsj.com/source/putongguti/350ml.jpg',
 			desc	: '350ml固体塑料瓶 61×61×138'
-		}
-	]
-};
-
-sxhfsj.data.prod[4] = {
-	id : 4,
-	name : '撕拉盖塑料瓶',
-	list : [
+		},
 		{
 			pic		: 'http://sxhfsj.com/source/silagai/75ml.jpg',
 			desc	: '75ml撕拉盖固体塑料瓶 ￠48×70'
@@ -148,8 +133,8 @@ sxhfsj.data.prod[4] = {
 	]
 };
 
-sxhfsj.data.prod[5] = {
-	id : 5,
+sxhfsj.data.prod[4] = {
+	id : 4,
 	name : '压旋盖塑料瓶',
 	list : [
 		{
@@ -157,54 +142,22 @@ sxhfsj.data.prod[5] = {
 			desc	: '30ml固体压旋盖塑料瓶l￠40×51'
 		},
 		{
-			pic		: 'http://sxhfsj.com/source/yaxuangai/60ml.jpg',
-			desc	: '60ml固体压旋盖塑料瓶l￠40×73'
-		},
-		{
-			pic		: 'http://sxhfsj.com/source/yaxuangai/100ml.jpg',
-			desc	: '100ml金属盖PET塑料瓶l￠46×84'
-		},
-		{
 			pic		: 'http://sxhfsj.com/source/yaxuangai/110ml.jpg',
 			desc	: '110ml扁方塑料瓶51×42×92'
-		},
-		{
-			pic		: 'http://sxhfsj.com/source/yaxuangai/110ml_1.jpg',
-			desc	: '110ml固体压旋盖塑料瓶l￠46×92'
 		},
 		{
 			pic		: 'http://sxhfsj.com/source/yaxuangai/150ml.jpg',
 			desc	: '150ml固体压旋盖塑料瓶l￠54×97'
 		},
 		{
-			pic		: 'http://sxhfsj.com/source/yaxuangai/150ml_1.jpg',
-			desc	: '150ml直桶固体压旋盖塑料瓶l￠52×102'
-		},
-		{
-			pic		: 'http://sxhfsj.com/source/yaxuangai/160ml.jpg',
-			desc	: '160ml扁方塑料瓶55×45×102'
-		},
-		{
-			pic		: 'http://sxhfsj.com/source/yaxuangai/200ml.jpg',
-			desc	: '200ml扁方塑料瓶56×45×117'
-		},
-		{
-			pic		: 'http://sxhfsj.com/source/yaxuangai/220ml.jpg',
-			desc	: '220ml固体压旋盖塑料瓶l￠54×133'
-		},
-		{
 			pic		: 'http://sxhfsj.com/source/yaxuangai/225ml.jpg',
 			desc	: '225ml固体压旋盖塑料瓶l￠61×113'
-		},
-		{
-			pic		: 'http://sxhfsj.com/source/yaxuangai/300ml.jpg',
-			desc	: '300ml扁方塑料瓶66×53×130'
 		}
 	]
 };
 
-sxhfsj.data.prod[6] = {
-	id : 6,
+sxhfsj.data.prod[5] = {
+	id : 5,
 	name : '液体塑料瓶',
 	list : [
 		{
@@ -220,10 +173,6 @@ sxhfsj.data.prod[6] = {
 			desc	: '50ml滴液瓶￠38×98'
 		},
 		{
-			pic		: 'http://sxhfsj.com/source/yeti/60ml.jpg',
-			desc	: '60ml喷雾瓶￠36×128'
-		},
-		{
 			pic		: 'http://sxhfsj.com/source/yeti/100ml_1.jpg',
 			desc	: '100ml液体塑料瓶￠45×105'
 		},
@@ -236,10 +185,6 @@ sxhfsj.data.prod[6] = {
 			desc	: '120ml液体PET塑料瓶￠48×122'
 		},
 		{
-			pic		: 'http://sxhfsj.com/source/yeti/180ml.jpg',
-			desc	: '180ml液体PET塑料瓶￠51×137'
-		},
-		{
 			pic		: 'http://sxhfsj.com/source/yeti/200ml.jpg',
 			desc	: '200ml液体塑料瓶￠51×140'
 		},
@@ -250,8 +195,8 @@ sxhfsj.data.prod[6] = {
 	]
 };
 
-sxhfsj.data.prod[7] = {
-	id : 7,
+sxhfsj.data.prod[6] = {
+	id : 6,
 	name : '塑料桶盒',
 	list : [
 		{
@@ -267,10 +212,6 @@ sxhfsj.data.prod[7] = {
 			desc	: '400g塑料桶￠97×83'
 		},
 		{
-			pic		: 'http://sxhfsj.com/source/tonghe/450g.jpg',
-			desc	: '450g塑料桶￠97×83'
-		},
-		{
 			pic		: 'http://sxhfsj.com/source/tonghe/500g.jpg',
 			desc	: '500g塑料桶￠87×108'
 		},
@@ -281,16 +222,12 @@ sxhfsj.data.prod[7] = {
 		{
 			pic		: 'http://sxhfsj.com/source/tonghe/600g.jpg',
 			desc	: '600g塑料桶￠87×125'
-		},
-		{
-			pic		: 'http://sxhfsj.com/source/tonghe/750g.jpg',
-			desc	: '750g塑料桶￠100×130'
 		}
 	]
 };
 
-sxhfsj.data.prod[8] = {
-	id : 8,
+sxhfsj.data.prod[7] = {
+	id : 7,
 	name : '工程塑料精密注塑件',
 	list : [
 		{
